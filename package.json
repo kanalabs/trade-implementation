@@ -1,0 +1,15 @@
+{
+  "name": "trade-implementation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aptos": "^1.21.0",
+    "dotenv": "^16.3.1"
+  }
+}
