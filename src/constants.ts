@@ -23,7 +23,7 @@ export const marketPrice = "/marketPrice";
 export const orderBook = "/orderBook";
 export const orderHistory = "/orderHistory";
 export const pairInfo = "/pairInfo";
-export const registerMarket = "/registerdMarkets";
+export const registerMarket = "/registeredMarkets";
 export const openOrder = "/openOrders";
 export const deposit = "/deposit";
 export const withdraw = "/withdraw";
@@ -31,3 +31,5 @@ export const marketAccountInfo = "/marketAccountInfo";
 
 export const SELL = true;
 export const BUY = false;
+
+

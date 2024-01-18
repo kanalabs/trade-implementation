@@ -5,7 +5,7 @@ import {
   openOrdersApi,
 } from "../requests";
 import { Types } from "aptos";
-import { SELL, account, aptosClient } from "../constants";
+import { SELL,BUY, account, aptosClient } from "../constants";
 config({ path: ".env" });
 
 const marketId = 7; // APT / LZUSDC market
@@ -17,7 +17,9 @@ const cancelAllOrders = async () => {
   console.log("🚀 ~ cancelAllOrders ~ payload:", payload);
   const transaction = await aptosClient.generateTransaction(
     account.address(),
-    payload
+    payload,
+    { gas_unit_price: `100`, max_gas_amount: "5000" }
+
   );
   const sign = await aptosClient.signTransaction(account, transaction);
   const submit = await aptosClient.submitTransaction(sign);
@@ -34,12 +36,13 @@ const cancelOrders = async () => {
     account.address().toString(),
     "open"
   );
-  const sellOrder = openOrders.asks[0].marketOrderId; 
-  
-  const payload = await cancelOrdersApi(marketId, SELL, sellOrder);
+  const sellOrder = openOrders.bids[0].marketOrderId;
+
+  const payload = await cancelOrdersApi(marketId, BUY, sellOrder.value);
   const transaction = await aptosClient.generateTransaction(
     account.address(),
-    payload
+    payload,
+    { gas_unit_price: `100`, max_gas_amount: "5000" }
   );
   const sign = await aptosClient.signTransaction(account, transaction);
   const submit = await aptosClient.submitTransaction(sign);
@@ -47,4 +50,4 @@ const cancelOrders = async () => {
   console.log("TX HASH", submit.hash);
 };
 
-cancelOrders();
+// cancelOrders();

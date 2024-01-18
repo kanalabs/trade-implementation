@@ -5,17 +5,18 @@ import { Types } from "aptos";
 config({ path: ".env" });
 
 const marketId = 7; // APT / LZUSDC market
-const amount = "50000000";
+const amount = "1";
 
 const main = async () => {
-  const limitOrderPayload = (await marketOrderApi(
+  const marketOrderPayload = (await marketOrderApi(
     marketId,
     amount,
     BUY
   )) as Types.EntryFunctionPayload;
+  console.log("🚀 ~ main ~ marketOrderPayload:", marketOrderPayload)
   const transaction = await aptosClient.generateTransaction(
     account.address(),
-    limitOrderPayload
+    marketOrderPayload
   );
   const sign = await aptosClient.signTransaction(account, transaction);
   const submit = await aptosClient.submitTransaction(sign);
