@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "aptos": "1.8.5",
+    "bignumber.js": "^9.1.2",
     "dotenv": "^16.3.1"
   },
   "devDependencies": {

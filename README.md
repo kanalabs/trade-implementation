@@ -1,5 +1,23 @@
 > MAKE SURE YOU PASS THE API-KEY as header as x-api-key
 
+## Terminologies
+
+**1.MaxBuyQuotes** 
+
+it is obtained multiplying the `size`and `price` for each item in `ASK` on order book and then adding up all
+these products. it gives the total number quote asset(USDC) needed to fill the all `ASK` orders
+
+> use toDecimalPrice api for conversion to reperesent it in normal numerical form
+
+**2.MaxSellSize**
+
+it is obtained by summing up all the `size` in `BID` on order book. it gives the total number of base asset (APT) 
+that is needed to to fill all the `ASK` orders
+
+> use toDecimalSize api for conversion to reperesent it in normal numerical form
+
+
+
 ## 1 .Registered Markets :
 
 Returns all registered markets
@@ -898,5 +916,111 @@ QueryParams :
       "volume": 420067
     },
   ]
+}
+```
+
+## 17. From Decimal Size
+Converts normal amount representation to lot representation
+
+```
+https://trade-endpoint/fromDecimalSize/?marketId=7&size=1000
+```
+
+Request Method : GET
+
+QueryParams :
+
+| PARAMS   | TYPE   |
+| -------- | ------ |
+| marketId | number |
+| size     | number |
+
+**Example Response**
+
+```JSON
+{
+    "status": "OK",
+    "data": {
+        "size": "1000000"
+    }
+}
+```
+
+## 17. From Decimal Price
+
+```
+https://trade-endpoint/fromDecimalPrice/?marketId=7&price=8219556085
+```
+
+Request Method : GET
+
+QueryParams :
+
+| PARAMS   | TYPE   |
+| -------- | ------ |
+| marketId | number |
+| price    | number |
+
+**Example Response**
+
+```JSON
+{
+    "status": "OK",
+    "data": {
+        "price": "8219556085000"
+    }
+}
+```
+
+## 18. To Decimal Price
+
+```
+https://trade-endpoint/toDecimalPrice/?marketId=7&price=8219556085
+```
+
+Request Method : GET
+
+QueryParams :
+
+| PARAMS   | TYPE   |
+| -------- | ------ |
+| marketId | number |
+| price    | number |
+
+**Example Response**
+
+```JSON
+{
+    "status": "OK",
+    "data": {
+        "price": "8219556.085"
+    }
+}
+```
+
+## 19. To Decimal Size
+Converts lot representation to normal amount representation
+
+```
+https://trade-endpoint/toDecimalSize/?marketId=7&size=1000
+```
+
+Request Method : GET
+
+QueryParams :
+
+| PARAMS   | TYPE   |
+| -------- | ------ |
+| marketId | number |
+| price    | number |
+
+**Example Response**
+
+```JSON
+{
+    "status": "OK",
+    "data": {
+        "size": "1"
+    }
 }
 ```

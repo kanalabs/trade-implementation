@@ -3,7 +3,7 @@ import {
   changeOrderSizeApi,
   openOrdersApi,
 } from "../requests";
-import { SELL, account, aptosClient } from "../constants";
+import { SELL,BUY, account, aptosClient } from "../constants";
 config({ path: ".env" });
 
 const marketId = 7; // APT / LZUSDC market
@@ -15,17 +15,20 @@ const changeOrderSize = async () => {
     account.address().toString(),
     "open"
   );
-  const sellOrderId = openOrders.asks[0].marketOrderId;
+  console.log("🚀 ~ changeOrderSize ~ openOrders:", openOrders)
+  const sellOrderId = openOrders.bids[0].marketOrderId;
+  console.log("🚀 ~ changeOrderSize ~ sellOrderId:", sellOrderId.value)
 
   const payload = await changeOrderSizeApi(
     marketId,
-    SELL,
-    sellOrderId,
-    "386982"
+    BUY,
+    sellOrderId.value,
+    "0.9"
   );
   const transaction = await aptosClient.generateTransaction(
     account.address(),
-    payload
+    payload,
+    {gas_unit_price : `100` , max_gas_amount : '4000'}
   );
   const sign = await aptosClient.signTransaction(account, transaction);
   const submit = await aptosClient.submitTransaction(sign);
