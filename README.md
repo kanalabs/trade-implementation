@@ -767,6 +767,8 @@ QueryParams :
 }
 ```
 > base_available / quote_available - is the the user's holdings for either base or quote. When trading from a user's market account, corresponds to either user::MarketAccount.base_available or user::MarketAccount.quote_available. When trading from a user's aptos_framework::coin::CoinStore or from standalone coins, corresponds to coin value.
+
+
 > base_ceiling / quote_ceiling - is the amount that the available asset amount could increase to beyond its present amount, even if the indicated trade were not executed. When trading from a user's market account, corresponds to either user::MarketAccount.base_ceiling or user::MarketAccount.quote_ceiling. When trading from a user's aptos_framework::coin::CoinStore or from standalone coins, is the same as available amount.
 
 ## 15. Get All Trades
